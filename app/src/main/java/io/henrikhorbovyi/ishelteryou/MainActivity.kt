@@ -3,24 +3,48 @@ package io.henrikhorbovyi.ishelteryou
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
-import io.henrikhorbovyi.ishelteryou.ui.theme.IShelterYouTheme
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import io.henrikhorbovyi.ishelteryou.ui.screen.AddHostScreen
+import io.henrikhorbovyi.ishelteryou.ui.screen.HostDetailScreen
+import io.henrikhorbovyi.ishelteryou.ui.screen.HostsMapScreen
+import io.henrikhorbovyi.ishelteryou.ui.theme.AppTheme
+import io.henrikhorbovyi.ishelteryou.viewmodel.HostsViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
+@OptIn(
+    ExperimentalMaterial3Api::class,
+    ExperimentalMaterialApi::class
+)
 class MainActivity : ComponentActivity() {
+
+    private val hostsViewModel: HostsViewModel by viewModel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            IShelterYouTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                    Text(stringResource(id = R.string.app_name))
+            val navController = rememberNavController()
+
+            AppTheme {
+                NavHost(navController = navController, startDestination = "hosts") {
+                    composable("hosts") {
+                        HostsMapScreen(
+                            onMarkerClicked = { hostId -> navController.navigate("details/$hostId") },
+                            sheetContent = { AddHostScreen(onPublishClicked = hostsViewModel::publishHost) },
+                        )
+                    }
+                    composable(
+                        route = "details/{hostId}",
+                        arguments = listOf(navArgument("hostId") { type = NavType.StringType })
+                    ) {
+                        val hostId = it.arguments?.getString("hostId")
+                        HostDetailScreen(hostId = hostId)
+                    }
                 }
             }
         }

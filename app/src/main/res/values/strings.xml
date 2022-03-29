@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">IShelterYou</string>
+    <string name="email_label">E-mail</string>
+    <string name="phone_label">Phone</string>
+    <string name="your_contacts">Your Contacts</string>
+    <string name="people_capacity_label">People capacity</string>
+    <string name="place_description_label">Describe your place</string>
+    <string name="place_postcode_label">Postcode</string>
+    <string name="place_label">About your place</string>
+    <string name="name_label">Your Name</string>
+    <string name="place_country_label">Country</string>
+    <string name="place_city_label">City</string>
+    <string name="place_address_label">Full Address</string>
+    <string name="publich_place_button_label">PUBLISH PLACE</string>
+    <string name="placel_pet_friendly_label">Is your place pet friendly?</string>
+    <string name="publish_host_screen_title">Make your home a shelter for refugee</string>
 </resources>

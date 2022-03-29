@@ -14,3 +14,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "IShelterYou"
 include ':app'
+include ':data'
