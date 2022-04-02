@@ -14,4 +14,15 @@
     <string name="publich_place_button_label">PUBLISH PLACE</string>
     <string name="placel_pet_friendly_label">Is your place pet friendly?</string>
     <string name="publish_host_screen_title">Make your home a shelter for refugee</string>
+    <string name="help_button_label">I CAN HELP</string>
+    <string name="help_button_icon_cd">Help button icon</string>
+    <string name="name_field_icon_cd">name field icon</string>
+    <string name="country_field_icon_cd">country field icon</string>
+    <string name="city_field_icon_cd">city field icon</string>
+    <string name="address_field_icon_cd">address field icon</string>
+    <string name="postcode_field_icon_cd">postcode field icon</string>
+    <string name="place_description_field_icon_cd">place description field icon</string>
+    <string name="people_capacity_field_icon_cd">people capacity field icon</string>
+    <string name="phone_number_field_icon_cd">phone number field icon</string>
+    <string name="email_field_icon_cd">email field icon</string>
 </resources>

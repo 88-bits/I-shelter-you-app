@@ -56,7 +56,7 @@ private fun HostForm(
             leadingIcon = {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_person),
-                    contentDescription = ""
+                    contentDescription = stringResource(R.string.name_field_icon_cd)
                 )
             },
             label = { Text(text = stringResource(R.string.name_label)) },
@@ -80,8 +80,8 @@ private fun HostForm(
             value = hostView.place.country,
             leadingIcon = {
                 Icon(
-                    painter = painterResource(id = R.drawable.ic_coutry),
-                    contentDescription = ""
+                    painter = painterResource(id = R.drawable.ic_country),
+                    contentDescription = stringResource(R.string.country_field_icon_cd)
                 )
             },
             onValueChange = {
@@ -98,7 +98,7 @@ private fun HostForm(
             leadingIcon = {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_city),
-                    contentDescription = ""
+                    contentDescription = stringResource(R.string.city_field_icon_cd)
                 )
             },
             onValueChange = {
@@ -115,7 +115,7 @@ private fun HostForm(
             leadingIcon = {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_address),
-                    contentDescription = ""
+                    contentDescription = stringResource(R.string.address_field_icon_cd)
                 )
             },
             onValueChange = {
@@ -132,7 +132,7 @@ private fun HostForm(
             leadingIcon = {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_numbers),
-                    contentDescription = ""
+                    contentDescription = stringResource(R.string.postcode_field_icon_cd)
                 )
             },
             onValueChange = {
@@ -148,7 +148,7 @@ private fun HostForm(
             leadingIcon = {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_description),
-                    contentDescription = ""
+                    contentDescription = stringResource(R.string.place_description_field_icon_cd)
                 )
             },
             label = { Text(text = stringResource(R.string.place_description_label)) },
@@ -168,7 +168,7 @@ private fun HostForm(
             leadingIcon = {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_people_capacity),
-                    contentDescription = ""
+                    contentDescription = stringResource(R.string.people_capacity_field_icon_cd)
                 )
             },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
@@ -195,7 +195,7 @@ private fun HostForm(
             leadingIcon = {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_phone),
-                    contentDescription = ""
+                    contentDescription = stringResource(R.string.phone_number_field_icon_cd)
                 )
             },
             onValueChange = {
@@ -212,7 +212,7 @@ private fun HostForm(
             leadingIcon = {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_email),
-                    contentDescription = ""
+                    contentDescription = stringResource(R.string.email_field_icon_cd)
                 )
             },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),

@@ -5,15 +5,17 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ModalBottomSheetLayout
 import androidx.compose.material.ModalBottomSheetValue
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Home
 import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.google.maps.android.compose.*
+import com.google.maps.android.compose.GoogleMap
+import com.google.maps.android.compose.MapUiSettings
+import com.google.maps.android.compose.Marker
+import com.google.maps.android.compose.MarkerState
 import io.henrikhorbovyi.ishelteryou.R
 import io.henrikhorbovyi.ishelteryou.state.HostsUiState
 import io.henrikhorbovyi.ishelteryou.state.rememberHostsMapState
@@ -52,7 +54,10 @@ fun HostsMapScreen(
                         cameraPositionState = hostsMapState.mapCameraPositionState,
                         uiSettings = MapUiSettings(zoomControlsEnabled = false)
                     ) {
-                        HostsContent(hostUiState = hostsMapState.hostsState, onMarkerClicked = onMarkerClicked)
+                        HostsContent(
+                            hostUiState = hostsMapState.hostsState,
+                            onMarkerClicked = onMarkerClicked
+                        )
                     }
                 },
                 floatingActionButton = {
@@ -60,8 +65,15 @@ fun HostsMapScreen(
                         onClick = {
                             scope.launch { sheetState.animateTo(ModalBottomSheetValue.Expanded) }
                         },
-                        text = { Text("I CAN HELP") },
-                        icon = { Icon(painterResource(id = R.drawable.ic_host), contentDescription = "Help button icon") }
+                        text = { Text(stringResource(R.string.help_button_label)) },
+                        icon = {
+                            Icon(
+                                painterResource(id = R.drawable.ic_host),
+                                contentDescription = stringResource(
+                                    R.string.help_button_icon_cd
+                                )
+                            )
+                        }
                     )
                 }
             )
@@ -70,7 +82,10 @@ fun HostsMapScreen(
 }
 
 @Composable
-private fun HostsContent(hostUiState: State<HostsUiState>, onMarkerClicked: (String?) -> Unit = {}) {
+private fun HostsContent(
+    hostUiState: State<HostsUiState>,
+    onMarkerClicked: (String?) -> Unit = {}
+) {
     when (val state = hostUiState.value) {
         is HostsUiState.Loading -> {
             // maybe show a progress
