@@ -2,9 +2,7 @@ package io.henrikhorbovyi.data.source.remote
 
 import io.henrikhorbovyi.data.source.remote.model.HostRemote
 import io.henrikhorbovyi.data.source.remote.model.HostResponse
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface HostService {
 
@@ -13,4 +11,8 @@ interface HostService {
 
     @POST("/hosts")
     suspend fun publish(@Body host: HostRemote)
+
+    @GET("/hosts/{id}")
+    suspend fun getById(@Path("id") hostId: String): HostRemote
+
 }

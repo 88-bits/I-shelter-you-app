@@ -1,4 +1,4 @@
-package io.henrikhorbovyi.ishelteryou
+package io.henrikhorbovyi.ishelteryou.ui.screen
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -10,9 +10,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import io.henrikhorbovyi.ishelteryou.ui.screen.AddHostScreen
-import io.henrikhorbovyi.ishelteryou.ui.screen.HostDetailScreen
-import io.henrikhorbovyi.ishelteryou.ui.screen.HostsMapScreen
 import io.henrikhorbovyi.ishelteryou.ui.theme.AppTheme
 import io.henrikhorbovyi.ishelteryou.viewmodel.HostsViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -43,7 +40,7 @@ class MainActivity : ComponentActivity() {
                         arguments = listOf(navArgument("hostId") { type = NavType.StringType })
                     ) {
                         val hostId = it.arguments?.getString("hostId")
-                        HostDetailScreen(hostId = hostId)
+                        HostDetailScreen(hostId = hostId, hostsViewModel = hostsViewModel)
                     }
                 }
             }

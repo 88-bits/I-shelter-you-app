@@ -38,4 +38,8 @@ class RealHostRepository(
         hostService.publish(hostWithLatLng.toRemote())
         hostDao.storeHosts(hostWithLatLng)
     }
+
+    override suspend fun getById(hostId: String?): Host {
+        return hostService.getById(hostId ?: "").toLocal()
+    }
 }
