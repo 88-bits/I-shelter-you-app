@@ -232,7 +232,7 @@ private fun HostForm(
             )
 
             Text(
-                text = stringResource(R.string.placel_pet_friendly_label),
+                text = stringResource(R.string.place_pet_friendly_label),
                 Modifier.clickable {
                     hostView = hostView
                         .copy(place = hostView.place.copy(isPetFriendly = !hostView.place.isPetFriendly))
@@ -252,7 +252,7 @@ private fun HostForm(
             )
         ) {
             Text(
-                text = stringResource(R.string.publich_place_button_label),
+                text = stringResource(R.string.publish_place_button_label),
                 modifier = Modifier.padding(vertical = 8.dp)
             )
         }

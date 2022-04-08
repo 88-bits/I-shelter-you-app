@@ -10,6 +10,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import io.henrikhorbovyi.ishelteryou.intent.openOnMap
+import io.henrikhorbovyi.ishelteryou.intent.sendEmail
+import io.henrikhorbovyi.ishelteryou.intent.sendMessage
 import io.henrikhorbovyi.ishelteryou.ui.theme.AppTheme
 import io.henrikhorbovyi.ishelteryou.viewmodel.HostsViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -40,7 +43,13 @@ class MainActivity : ComponentActivity() {
                         arguments = listOf(navArgument("hostId") { type = NavType.StringType })
                     ) {
                         val hostId = it.arguments?.getString("hostId")
-                        HostDetailScreen(hostId = hostId, hostsViewModel = hostsViewModel)
+                        HostDetailScreen(
+                            hostId = hostId,
+                            hostsViewModel = hostsViewModel,
+                            onSendMessage = ::sendMessage,
+                            onSendEmail = ::sendEmail,
+                            onOpenMap = ::openOnMap
+                        )
                     }
                 }
             }
