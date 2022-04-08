@@ -11,8 +11,8 @@
     <string name="place_country_label">Country</string>
     <string name="place_city_label">City</string>
     <string name="place_address_label">Full Address</string>
-    <string name="publich_place_button_label">PUBLISH PLACE</string>
-    <string name="placel_pet_friendly_label">Is your place pet friendly?</string>
+    <string name="publish_place_button_label">PUBLISH PLACE</string>
+    <string name="place_pet_friendly_label">Is your place pet friendly?</string>
     <string name="publish_host_screen_title">Make your home a shelter for refugee</string>
     <string name="help_button_label">I CAN HELP</string>
     <string name="help_button_icon_cd">Help button icon</string>
@@ -25,4 +25,9 @@
     <string name="people_capacity_field_icon_cd">people capacity field icon</string>
     <string name="phone_number_field_icon_cd">phone number field icon</string>
     <string name="email_field_icon_cd">email field icon</string>
+    <string name="user_name_template">%s place</string>
+    <string name="pet_friendly_note">This place is pet friendly</string>
+    <string name="open_address_button_label">OPEN ADDRESS ON MAPS</string>
+    <string name="send_email_button_label">SEND E-MAIL</string>
+    <string name="send_message_button_label">SEND A MESSAGE</string>
 </resources>
