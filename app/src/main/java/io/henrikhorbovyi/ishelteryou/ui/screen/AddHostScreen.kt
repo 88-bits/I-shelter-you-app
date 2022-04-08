@@ -1,5 +1,6 @@
 package io.henrikhorbovyi.ishelteryou.ui.screen
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -25,7 +26,10 @@ import io.henrikhorbovyi.ishelteryou.ui.theme.Shapes
 fun AddHostScreen(
     modifier: Modifier = Modifier,
     onPublishClicked: (HostUi) -> Unit = {},
+    onBackPressed: () -> Unit = {}
 ) {
+    BackHandler { onBackPressed() }
+
     LazyColumn(modifier.padding(16.dp)) {
         item {
             Text(

@@ -2,9 +2,13 @@ package io.henrikhorbovyi.ishelteryou.ui.screen
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.ModalBottomSheetValue
+import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -15,6 +19,7 @@ import io.henrikhorbovyi.ishelteryou.intent.sendEmail
 import io.henrikhorbovyi.ishelteryou.intent.sendMessage
 import io.henrikhorbovyi.ishelteryou.ui.theme.AppTheme
 import io.henrikhorbovyi.ishelteryou.viewmodel.HostsViewModel
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 @OptIn(
@@ -29,13 +34,21 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val navController = rememberNavController()
+            val sheetState = rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
+            val scope = rememberCoroutineScope()
 
             AppTheme {
                 NavHost(navController = navController, startDestination = "hosts") {
                     composable("hosts") {
                         HostsMapScreen(
                             onMarkerClicked = { hostId -> navController.navigate("details/$hostId") },
-                            sheetContent = { AddHostScreen(onPublishClicked = hostsViewModel::publishHost) },
+                            sheetState = sheetState,
+                            sheetContent = {
+                                AddHostScreen(
+                                    onPublishClicked = hostsViewModel::publishHost,
+                                    onBackPressed = { scope.launch { sheetState.hide() } }
+                                )
+                            },
                         )
                     }
                     composable(

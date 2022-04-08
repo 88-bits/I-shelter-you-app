@@ -142,7 +142,7 @@ private fun Content(
                 )
                 Button(
                     modifier = Modifier.fillMaxWidth(),
-                    onClick = {  onOpenMap(host.place.address) },
+                    onClick = { onOpenMap(host.place.address) },
                     shape = Shapes.medium,
                     colors = ButtonDefaults.buttonColors(
                         containerColor = MaterialTheme.colorScheme.secondaryContainer,

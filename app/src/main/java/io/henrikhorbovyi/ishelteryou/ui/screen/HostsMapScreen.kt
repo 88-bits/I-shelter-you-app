@@ -2,11 +2,11 @@ package io.henrikhorbovyi.ishelteryou.ui.screen
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.ModalBottomSheetLayout
-import androidx.compose.material.ModalBottomSheetValue
-import androidx.compose.material.rememberModalBottomSheetState
+import androidx.compose.material.*
 import androidx.compose.material3.*
+import androidx.compose.material3.ExtendedFloatingActionButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -26,14 +26,12 @@ import kotlinx.coroutines.launch
 @Composable
 fun HostsMapScreen(
     onMarkerClicked: (String?) -> Unit = {},
+    sheetState: ModalBottomSheetState,
     sheetContent: @Composable () -> Unit = {}
 ) {
     val hostsMapState = rememberHostsMapState()
     val scope = rememberCoroutineScope()
     var sheetShapeState by remember { mutableStateOf(8.dp) }
-    val sheetState = rememberModalBottomSheetState(
-        initialValue = ModalBottomSheetValue.Hidden
-    )
 
     LaunchedEffect(sheetState.currentValue) {
         sheetShapeState = if (sheetState.currentValue == ModalBottomSheetValue.Expanded)
