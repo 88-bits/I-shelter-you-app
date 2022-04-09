@@ -17,6 +17,7 @@ data class Host(
     @Embedded
     val contact: Contact,
     val createdAt: String,
+    val isFavorite: Boolean = false
 )
 
 fun Host.toRemote(): HostRemote = HostRemote(

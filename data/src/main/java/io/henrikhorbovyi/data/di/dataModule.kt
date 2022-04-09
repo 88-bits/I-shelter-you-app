@@ -22,7 +22,7 @@ val dataModule = module {
     factory<HostDao> { get<AppDatabase>().hostDao() }
 
     // Remote Service
-    single<HostService> { ServiceBuilder(baseUrl = "http://10.0.2.2:8080") }
+    single<HostService> { ServiceBuilder(baseUrl = "https://i-shelter-you-api.herokuapp.com") }
 
     // HostRepository
     factory<HostRepository> { RealHostRepository(get(), get(), get()) }

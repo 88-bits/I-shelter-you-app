@@ -13,6 +13,6 @@ interface HostService {
     suspend fun publish(@Body host: HostRemote)
 
     @GET("/hosts/{id}")
-    suspend fun getById(@Path("id") hostId: String): HostRemote
+    suspend fun getHostById(@Path("id") hostId: String): HostRemote
 
 }

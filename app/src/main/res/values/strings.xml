@@ -13,7 +13,7 @@
     <string name="place_address_label">Full Address</string>
     <string name="publish_place_button_label">PUBLISH PLACE</string>
     <string name="place_pet_friendly_label">Is your place pet friendly?</string>
-    <string name="publish_host_screen_title">Make your home a shelter for refugee</string>
+    <string name="publish_host_screen_title">Make your home a shelter for refugees</string>
     <string name="help_button_label">I CAN HELP</string>
     <string name="help_button_icon_cd">Help button icon</string>
     <string name="name_field_icon_cd">name field icon</string>
@@ -30,4 +30,6 @@
     <string name="open_address_button_label">OPEN ADDRESS ON MAPS</string>
     <string name="send_email_button_label">SEND E-MAIL</string>
     <string name="send_message_button_label">SEND A MESSAGE</string>
+    <string name="share_host_icon_cd">Share host icon</string>
+    <string name="make_place_favorite_icon_cd">Make place favorite icon</string>
 </resources>

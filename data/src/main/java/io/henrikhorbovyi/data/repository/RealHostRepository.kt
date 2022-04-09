@@ -39,7 +39,7 @@ class RealHostRepository(
         hostDao.storeHosts(hostWithLatLng)
     }
 
-    override suspend fun getById(hostId: String?): Host {
-        return hostService.getById(hostId ?: "").toLocal()
+    override suspend fun getDetailsOf(hostId: String?): Host {
+        return hostService.getHostById(hostId ?: "").toLocal()
     }
 }

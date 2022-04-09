@@ -4,6 +4,10 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.selection.SelectionContainer
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Favorite
+import androidx.compose.material.icons.rounded.FavoriteBorder
+import androidx.compose.material.icons.rounded.Share
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -11,6 +15,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
@@ -18,31 +23,35 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import io.henrikhorbovyi.ishelteryou.R
-import io.henrikhorbovyi.ishelteryou.state.HostUiState
+import io.henrikhorbovyi.ishelteryou.state.HostDetailsUiState
 import io.henrikhorbovyi.ishelteryou.ui.entity.HostUi
 import io.henrikhorbovyi.ishelteryou.ui.theme.Shapes
-import io.henrikhorbovyi.ishelteryou.viewmodel.HostsViewModel
+import io.henrikhorbovyi.ishelteryou.viewmodel.HostDetailsViewModel
 
 @Composable
 fun HostDetailScreen(
     hostId: String? = "",
-    hostsViewModel: HostsViewModel = viewModel(),
+    hostDetailsViewModel: HostDetailsViewModel = viewModel(),
+    onFavoriteClicked: (isFavorite: Boolean) -> Unit = {},
+    onShareClicked: (host: HostUi) -> Unit = {},
     onSendMessage: (phone: String) -> Unit = {},
     onSendEmail: (email: String) -> Unit = {},
     onOpenMap: (address: String) -> Unit = {},
 ) {
 
-    val hostState by hostsViewModel.hostByIdState.collectAsState()
+    val hostState by hostDetailsViewModel.hostDetailsState.collectAsState()
 
     LaunchedEffect(hostId) {
-        hostsViewModel.getHostById(hostId)
+        hostDetailsViewModel.getDetailsOf(hostId)
     }
 
     when (val state = hostState) {
-        is HostUiState.Loading -> ProgressIndicator()
-        is HostUiState.Error -> { /* >> todo << */ }
-        is HostUiState.Loaded -> Content(
-            state.host,
+        is HostDetailsUiState.Loading -> ProgressIndicator()
+        is HostDetailsUiState.Error -> { /* >> todo << */ }
+        is HostDetailsUiState.Loaded -> Content(
+            host = state.host,
+            onFavoriteClicked = onFavoriteClicked,
+            onShareClicked = onShareClicked,
             onSendMessage = onSendMessage,
             onSendEmail = onSendEmail,
             onOpenMap = onOpenMap
@@ -53,6 +62,8 @@ fun HostDetailScreen(
 @Composable
 private fun Content(
     host: HostUi,
+    onFavoriteClicked: (isFavorite: Boolean) -> Unit = {},
+    onShareClicked: (host: HostUi) -> Unit = {},
     onSendMessage: (phone: String) -> Unit = {},
     onSendEmail: (email: String) -> Unit = {},
     onOpenMap: (address: String) -> Unit = {},
@@ -63,6 +74,29 @@ private fun Content(
             .padding(16.dp)
     ) {
         item {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.End
+            ) {
+                IconButton(onClick = { onShareClicked(host) }) {
+                    Icon(
+                        Icons.Rounded.Share,
+                        contentDescription = stringResource(R.string.share_host_icon_cd)
+                    )
+                }
+                /*IconButton(
+                    onClick = { onFavoriteClicked(!host.isFavorite) },
+                    content = {
+                        Icon(
+                            if (host.isFavorite) Icons.Rounded.Favorite else Icons.Rounded.FavoriteBorder,
+                            tint = MaterialTheme.colorScheme.error,
+                            contentDescription = stringResource(R.string.make_place_favorite_icon_cd)
+                        )
+                    }
+                )*/
+            }
+
             Text(
                 text = stringResource(R.string.user_name_template, host.name),
                 style = MaterialTheme.typography.headlineMedium,
@@ -71,21 +105,24 @@ private fun Content(
             host.place.run {
                 DetailSection(
                     label = stringResource(id = R.string.place_country_label),
-                    value = country
+                    value = country,
                 )
-                DetailSection(label = stringResource(id = R.string.place_city_label), value = city)
+                DetailSection(
+                    label = stringResource(id = R.string.place_city_label),
+                    value = city,
+                )
                 DetailSection(
                     label = stringResource(id = R.string.place_address_label),
                     value = address,
-                    onClick = onOpenMap
+                    onClick = onOpenMap,
                 )
                 DetailSection(
                     label = stringResource(id = R.string.place_postcode_label),
-                    value = postcode
+                    value = postcode,
                 )
                 DetailSection(
                     label = stringResource(id = R.string.place_description_label),
-                    value = description
+                    value = description,
                 )
                 DetailSection(
                     label = stringResource(id = R.string.people_capacity_label),
